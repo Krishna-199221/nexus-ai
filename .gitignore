@@ -1,0 +1,66 @@
+# ==============================
+# NEXUS AI - Git Ignore
+# ==============================
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+.npm/
+*.tsbuildinfo
+
+# Logs
+*.log
+logs/
+
+# Databases / local data
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded/local generated files
+uploads/
+storage/
+tmp/
+temp/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python packaging
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Docker local overrides
+docker-compose.override.yml
