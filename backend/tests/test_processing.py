@@ -6,6 +6,7 @@ import pytest
 from app.core.database import SessionLocal
 from app.models import (
     Document,
+    DocumentChunk,
     DocumentProcessingStatus,
     Source,
     User,
@@ -65,6 +66,17 @@ def test_process_document_success(tmp_path: Path):
             document.processing_status
             == DocumentProcessingStatus.COMPLETED
         )
+
+        stored_chunks = (
+            db.query(DocumentChunk)
+            .filter(DocumentChunk.document_id == document.id)
+            .order_by(DocumentChunk.chunk_index)
+            .all()
+        )
+
+        assert len(stored_chunks) == 1
+        assert stored_chunks[0].content == "NEXUS AI processing test"
+        assert stored_chunks[0].chunk_index == 0
 
     finally:
         db.delete(document)

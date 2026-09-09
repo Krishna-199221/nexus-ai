@@ -11,11 +11,29 @@ def create_document_chunks(
     chunk_size: int = 1000,
     chunk_overlap: int = 200,
 ) -> list[DocumentChunk]:
+    """
+    Create and persist chunks for a document.
+
+    Existing chunks for the document are removed first so that
+    reprocessing the same document does not create duplicates.
+    """
+
     chunks = chunk_text(
         text,
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
     )
+
+    existing_chunks = (
+        db.query(DocumentChunk)
+        .filter(DocumentChunk.document_id == document.id)
+        .all()
+    )
+
+    for existing_chunk in existing_chunks:
+        db.delete(existing_chunk)
+
+    db.flush()
 
     document_chunks = []
 
