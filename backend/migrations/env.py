@@ -4,6 +4,7 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from app.core.database import Base, DATABASE_URL
+from app.models import Document, DocumentChunk, Source, User
 
 config = context.config
 
