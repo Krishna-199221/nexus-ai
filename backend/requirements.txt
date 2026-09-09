@@ -9,3 +9,6 @@ sqlalchemy
 psycopg[binary]
 alembic
 python-multipart
+pymupdf
+python-docx
+openpyxl

@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.models import Document, DocumentProcessingStatus, Source
 from app.schemas.document import DocumentResponse
+from app.services.processing import process_document
 from app.services.storage import save_upload
 
 
@@ -72,5 +73,10 @@ def upload_document(
     db.add(document)
     db.commit()
     db.refresh(document)
+
+    try:
+        process_document(db, document)
+    except Exception:
+        pass
 
     return document
