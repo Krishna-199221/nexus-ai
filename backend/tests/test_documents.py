@@ -58,13 +58,14 @@ def test_upload_document():
         assert data["source_id"] == str(source.id)
         assert data["filename"] == "test-document.txt"
         assert data["document_type"] == "TXT"
-        assert data["processing_status"] == "UPLOADED"
+        assert data["processing_status"] == "COMPLETED"
 
         document = db.get(Document, data["id"])
 
         assert document is not None
         assert document.source_id == source.id
         assert document.filename == "test-document.txt"
+        assert document.processing_status.value == "COMPLETED"
 
         stored_path = document.file_path
 
